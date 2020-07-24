@@ -264,6 +264,7 @@ public class CompetingMessageCorrelationTest extends ConcurrencyTestCase {
   // TODO: understand what FOR UPDATE does on the key-value level (e.g. does it acquire write intents on which key value pairs?)
   @Deployment(resources = "org/camunda/bpm/engine/test/concurrency/CompetingMessageCorrelationTest.catchMessageProcess.bpmn20.xml")
   @Test
+  @RequiredDatabase(excludes = DbSqlSessionFactory.CRDB)
   public void testConcurrentMixedCorrelation() throws InterruptedException {
     InvocationLogListener.reset();
 

@@ -30,6 +30,8 @@ import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
 import org.camunda.bpm.engine.impl.test.RequiredDatabase;
 import org.camunda.bpm.engine.test.RequiredHistoryLevel;
+import org.junit.After;
+import org.junit.Test;
 
 /**
  * We only test Serializable Transaction Isolation on CockroachDB.
@@ -68,6 +70,7 @@ public class TransactionIsolationSerializableTest extends ConcurrencyTestCase {
   // TODO: ignore on CockroachDB and at a later point create dedicated concurrency test cases
   // for CockroachDB that reproduce the scenarios described in https://docs.google.com/document/d/1jf1hsFoLBL0xAkwasV2-S5uf0iGw93FITwMMLJVZjz0/edit 
   // and verify that our implementation can handle them
+  @Test
   public void testTransactionIsolation() {
 
     thread1 = executeControllableCommand(new TestCommand("p1"));
@@ -122,7 +125,7 @@ public class TransactionIsolationSerializableTest extends ConcurrencyTestCase {
 
   }
 
-  @Override
+  @After
   protected void tearDown() throws Exception {
 
     // end interaction with Thread 2
